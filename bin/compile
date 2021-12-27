@@ -8,7 +8,7 @@ indent() {
 echo "-----> Install ffmpeg-thumbnailer"
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
-DOWNLOAD_URL="https://api.github.com/repos/johnklawlor/ffmpegthumbnailer/contents/ffmpegthumbnailer.tar.gz"
+DOWNLOAD_URL="https://github.com/vaha-technology/heroku-buildpack-ffmpeg-thumbnailer/releases/download/ffmpegthumbnailer-2.2.2/ffmpeg-thumbnailer-2.1.1.tar.xz"
 
 echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 
@@ -20,5 +20,5 @@ curl --silent -L -H "Accept: application/vnd.github.raw" $DOWNLOAD_URL | tar xz
 echo "exporting PATH and LIBRARY_PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpegthumbnailer.sh"
 mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$PATH:vendor/ffmpegthumbnailer/bin"' >> $PROFILE_PATH
-echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:vendor/ffmpegthumbnailer/lib"' >> $PROFILE_PATH
+echo 'export PATH="$PATH:vendor/usr/ffmpegthumbnailer/bin"' >> $PROFILE_PATH
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:vendor/usr/ffmpegthumbnailer/lib"' >> $PROFILE_PATH
