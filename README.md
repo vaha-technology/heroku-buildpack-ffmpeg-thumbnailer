@@ -1,19 +1,21 @@
-heroku-buildpack-ffmpeg-thumbnailer
-===================================
+# heroku-buildpack-ffmpeg-thumbnailer
 
-I'm so excited to share this buildpack with everyone because 1) of the amount of frustration, time, and energy to get ffmpegthumbnailer working on heroku and 2) it works. If it doesn't work for you, please let me know at john.k.lawlor@gmail.com.
+Fork of https://github.com/Maysora/heroku-buildpack-ffmpeg-thumbnailer all credit goes to the original maintainer, but since the code is published under a MIT License, we decided to fork it to prevent any supply channel security issues and due to the download of a static ffmpeg from johnvansickle.com failing randomly.
 
-Firstly, you'll need to use the "multi-buildpack" buildpack over at https://github.com/ddollar/heroku-buildpack-multi
+A Heroku buildpack for ffmpeg that always downloads the [version 2.0.8 binaries](https://github.com/vaha-technology/heroku-buildpack-ffmpeg-thumbnailer/releases/download/ffmpegthumbnailer-2.0.8/ffmpegthumbnailer_2.0.8.bin.tar.gz)
 
-That repo will show you how to set the BUILDPACK_URL config variable on heroku, and how to add additional buildpacks to your application. You'll want to add these two buildpacks to get ffmpegthumbnailer to work.
+## Usage
 
-    https://github.com/shunjikonishi/heroku-buildpack-ffmpeg
-    https://github.com/johnklawlor/heroku-buildpack-ffmpeg-thumbnailer
+Run the following from the heroku command line:
 
-You'll also need to add your respective native language (at least I had to). If you're building a Ruby application (like myself), add this line to your .buildpacks file.
+```
+heroku buildpacks:add --index 1 https://github.com/vaha-technology/heroku-buildpack-ffmpeg-thumbnailer.git --app HEROKU_APP
+```
 
-    https://github.com/heroku/heroku-buildpack-ruby
+```
+Set HEROKU_APP to the heroku app you want to refer to
+```
 
-If you're using a different native language, refer to Heroku's default buildpacks list in their reference guide here.
-
-https://devcenter.heroku.com/articles/buildpacks#default-buildpacks
+Note: This buildpack should be added before the main language buildpack (by using `--index 1`),
+since the application process types are calculated from the last buildpack in the list if no
+`Procfile` is specified.
